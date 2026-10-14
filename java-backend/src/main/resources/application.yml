@@ -10,7 +10,7 @@ spring:
     url: jdbc:h2:mem:camundadb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
-    password: 
+    password:
   h2:
     console:
       enabled: true
@@ -45,3 +45,39 @@ logging:
     root: INFO
     org.camunda.bpm: INFO
     com.company.workflow: DEBUG
+
+
+
+#camunda:
+#  bpm:
+#    generic-properties:
+#      properties:
+#        historyTimeToLive: 8
+#
+#    admin-user:
+#      id: admin
+#      password: admin
+#    filter:
+#      create: All tasks
+#    #    database:
+#    #      type: postgresql
+#    #      schema-update: true
+#    history-level: full
+#    enforce-history-time-to-live: false
+#    enabled: true
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/congvan?serverTimezone=UTC
+#    username: root
+#    password: 123456aA
+#    driver-class-name: org.postgresql.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#
+#

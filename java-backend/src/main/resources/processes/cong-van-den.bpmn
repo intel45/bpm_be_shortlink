@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+  id="Definitions_1"
+  targetNamespace="http://camunda.org/examples">
+
+  <bpmn:process id="CongVanDenProcess" name="Quy trình Công văn đến" isExecutable="true" camunda:historyTimeToLive="180">
+
+    <bpmn:startEvent id="StartEvent" name="Bắt đầu" />
+
+    <bpmn:userTask id="NhapCongVan" name="Văn thư nhập công văn"
+      camunda:assignee="vanthu" />
+
+    <bpmn:userTask id="TrinhLanhDao" name="Trình lãnh đạo"
+      camunda:assignee="vanthu" />
+
+    <bpmn:userTask id="PhanCong" name="Lãnh đạo phân công"
+      camunda:assignee="lanhdao" />
+
+    <bpmn:userTask id="XuLyCongVan" name="Nhân viên xử lý"
+      camunda:assignee="${nguoiXuLy}" />
+
+    <bpmn:exclusiveGateway id="GatewayHoanThanh" name="Hoàn thành?" />
+
+    <bpmn:userTask id="LuuTru" name="Văn thư lưu trữ"
+      camunda:assignee="vanthu" />
+
+    <bpmn:endEvent id="EndEvent" name="Kết thúc" />
+
+    <!-- SEQUENCE FLOW -->
+    <bpmn:sequenceFlow id="flow1" sourceRef="StartEvent" targetRef="NhapCongVan"/>
+    <bpmn:sequenceFlow id="flow2" sourceRef="NhapCongVan" targetRef="TrinhLanhDao"/>
+    <bpmn:sequenceFlow id="flow3" sourceRef="TrinhLanhDao" targetRef="PhanCong"/>
+    <bpmn:sequenceFlow id="flow4" sourceRef="PhanCong" targetRef="XuLyCongVan"/>
+    <bpmn:sequenceFlow id="flow5" sourceRef="XuLyCongVan" targetRef="GatewayHoanThanh"/>
+
+    <bpmn:sequenceFlow id="flow6" sourceRef="GatewayHoanThanh" targetRef="LuuTru">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
+        ${ketQua == 'HOAN_THANH'}
+      </bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:sequenceFlow id="flow7" sourceRef="GatewayHoanThanh" targetRef="XuLyCongVan">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
+        ${ketQua != 'HOAN_THANH'}
+      </bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:sequenceFlow id="flow8" sourceRef="LuuTru" targetRef="EndEvent"/>
+
+  </bpmn:process>
+</bpmn:definitions>

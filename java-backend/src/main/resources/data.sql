@@ -1,0 +1,19 @@
+-- CREATE TABLE cong_van (
+--                           id BIGINT PRIMARY KEY,
+--                           so_cong_van VARCHAR(50),
+--                           so_den VARCHAR(50),
+--                           trich_yeu TEXT,
+--                           loai VARCHAR(30),
+--                           do_mat VARCHAR(20),
+--                           do_khan VARCHAR(20),
+--                           ngay_den DATE,
+--                           trang_thai VARCHAR(30)
+-- );
+-- CREATE TABLE xu_ly_cong_van (
+--                                 id BIGINT PRIMARY KEY,
+--                                 cong_van_id BIGINT,
+--                                 nguoi_xu_ly BIGINT,
+--                                 han_xu_ly DATE,
+--                                 trang_thai VARCHAR(30),
+--                                 y_kien TEXT
+-- );
